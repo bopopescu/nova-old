@@ -1,0 +1,15 @@
+/data/log/nova/nova-compute.log {
+    daily
+    missingok
+    rotate 30
+    compress
+    delaycompress
+}
+
+/data/log/nova/unified-nova-compute.log {
+    daily
+    missingok
+    rotate 30
+    compress
+    delaycompress
+}

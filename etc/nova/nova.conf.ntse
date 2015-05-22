@@ -1,0 +1,209 @@
+[DEFAULT]
+## controller
+glance_api_servers=127.0.0.1:9292
+sql_connection=mysql://nova:nova@localhost/nova
+rabbit_host=127.0.0.1
+node_availability_zone=nova1
+
+start_guests_on_host_boot=true
+resume_guests_state_on_host_boot=false
+
+api_rate_limit=false
+
+## vnc
+vncserver_proxyclient_address=127.0.0.1
+vncserver_listen=127.0.0.1
+novncproxy_base_url=http://${local_wan_ip}:6080/vnc_auto.html
+
+## instance path
+logdir=/data/log/nova
+state_path=/data/nova
+lock_path=/data/nova/lock
+
+######### unified log ######
+#unified_log_dir=/data/log/nova
+#unified_log_level=DEBUG
+
+## quotas
+quota_cores=20
+quota_floating_ips=0
+quota_gigabytes=400
+quota_instances=10
+quota_ram=20480
+quota_volumes=0
+quota_ecus=80
+quota_private_floating_ips=10
+
+###### network ######
+fixed_range=10.120.60.0/24
+public_interface=eth1
+
+use_dhcp_by_location=True
+fixed_range_by_location=10.120.60.0/24
+fixed_range_by_location_start=10.120.60.65
+
+intranet_firewall_mode=tenant
+ipset_range=10.120.60.0/24
+
+use_private_floating_ip=true
+private_floating_pools=lan
+private_floating_ip_range=10.120.61.0/24
+private_floating_ip_dst=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+private_floating_ip_dst_setname=nova-private-floating-ip-dst
+
+###### network qos ######
+use_network_qos=true
+network_qos_host_private_bandwidth=10000
+network_qos_host_public_bandwidth=1000
+reserved_host_network_private_bandwidth=1000
+reserved_host_network_public_bandwidth=100
+network_qos_private_allocation_ratio=1.0
+network_qos_public_allocation_ratio=1.0
+network_qos_config=/etc/nova/network_qos_config.json
+network_qos_egress_interface=ifb0
+network_qos_ingress_interface=ifb1
+network_qos_physical_interface=eth0,eth1
+network_qos_whitelist=10.120.60.0/24,10.120.61.0/24
+
+# quota for tenant public network bandwidth (in mbit/s)
+quota_public_network_bandwidth=30
+
+# default snat network qos control incoming traffic on routing_source_ip
+#routing_source_ip=10.0.0.1
+
+###### nos_client #####
+nos_url=127.0.0.1:8181
+nos_host=nos.netease.com
+nos_accessKey=
+nos_accessSecret=
+nos_keypairs_bucket=
+nos_keypairs_expires=86400
+nos_use_domain=False
+
+##### using rsync to replace scp when resizing instance #####
+use_rsync=true
+rsync_auth_user=nova
+rsync_secret_file=/etc/rsync/nova.pas
+rsync_port=10873
+use_intranet=true
+rsync_config_file=/etc/rsync/rsyncd.conf
+
+##### ioqos #####
+use_instance_storage_qos=True
+host_blkio_read_iops=20000
+host_blkio_write_iops=20000
+host_blkio_read_bps=1000000000
+host_blkio_write_bps=1000000000
+
+###################
+#### Constant ####
+###################
+verbose=true
+auth_strategy=keystone
+root_helper=sudo nova-rootwrap
+image_service=nova.image.glance.GlanceImageService
+compute_manager=nova.compute.manager.ComputeManager
+connection_type=libvirt
+libvirt_type=kvm
+libvirt_use_virtio_for_bridges=true
+rootwrap_config=/etc/nova/rootwrap.conf
+notification_driver=nova.openstack.common.notifier.rabbit_notifier
+notification_topics=notifications,notifications.$my_ip
+api_paste_config=/etc/nova/api-paste.ini
+scheduler_default_filters=RetryFilter,AvailabilityZoneFilter,RamFilter,CoreFilter,ComputeFilter,AggregateInstanceExtraSpecsFilter,ImagePropertiesFilter,JsonFilter,EcuFilter,NetworkFilter,DiskFilter
+default_log_levels = amqplib=WARN,sqlalchemy=WARN,boto=WARN,suds=INFO,keystone=INFO,eventlet.wsgi.server=WARN,nosclient=INFO
+
+osapi_max_limit=5000
+osapi_compute_workers=2
+metadata_workers=2
+
+running_deleted_instance_action=reap
+until_refresh=5
+max_age=86400
+
+ram_allocation_ratio=1.0
+cpu_allocation_ratio=4.0
+reserved_host_disk_mb=10240
+reserved_host_memory_mb=8192
+
+###### date time format ###
+# default is False
+use_local_time = True
+
+instance_usage_audit=True
+notify_on_any_change = True
+notify_on_state_change = vm_and_task_state
+service_down_time=120
+rpc_response_timeout=300
+
+allow_same_net_traffic=false
+allow_resize_to_same_host=true
+allow_image_snapshot_optimization=true
+
+###### NBS ######
+#default value of ebs_backend is 'cinder', nbs is disable.
+ebs_backend=nbs
+#nbs_api_server=localhost:9080
+#nbs_prefix_url=EBS
+host_ip_ifname=eth0
+#nbs_boot_wait_timeout=120
+#nbs_attach_wait_timeout=30
+#nbs_extend_wait_timeout=30
+#attach_detach_interval=5
+#nbs_mountpoint_prefix='/dev/nbs/xd'
+
+## networks
+dhcpbridge_flagfile=/etc/nova/nova.conf
+dhcpbridge=/usr/bin/nova-dhcpbridge
+network_manager=nova.network.manager.FlatDHCPManager
+multi_host=true
+
+# auto confirm resize
+resize_confirm_window=60
+
+##### ephermeral_disk using lvm #####
+libvirt_images_volume_group=None
+libvirt_ephemeral_use_lvm=False
+
+##### monitor service for HA #####
+check_services=nova-compute
+service_failure_time=15
+instance_failure_time=15
+service_recover_time=300
+instance_recover_time=180
+monitor_interval=15
+
+##### record all vms heartbeat or only HA #####
+record_all_vms_heartbeat=True
+server_heartbeat_period=10
+
+## CPU QOS
+enable_cpuqos=false
+#ecu_ratio=4
+#vcpu_pin_set=None
+#free_bursting_ecu_limit=4
+#free_bursting_ecu_num=1
+#cpu_period=100000
+#cpu_shares=1024
+#fine_tuning_factors=1.2,1.15,1.1,1.0
+
+###### inject files  ######
+allow_store_personality=True
+allow_inject_files=True
+
+###### keypairs ######
+keypairs_connect_nos=True
+
+memcached_servers=127.0.0.1:11211
+
+##### Otherwise only after 120s, the fixed-ip will deassosicate with instance
+force_dhcp_release=true
+
+
+# modprobe modules for nova service
+kernel_modules_for_compute = nbd nbds_max=32
+kernel_modules_for_network = ifb,vhost_net
+use_vhost_net = True
+
+# scheduler weigher
+compute_aggregate_metadata_cost_more_fn_weight=512000

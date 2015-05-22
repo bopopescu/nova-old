@@ -1,0 +1,21 @@
+{
+    "flavor": {
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "disk": 0,
+        "id": "1",
+        "links": [
+            {
+                "href": "http://openstack.example.com/v2/openstack/flavors/1",
+                "rel": "self"
+            },
+            {
+                "href": "http://openstack.example.com/openstack/flavors/1",
+                "rel": "bookmark"
+            }
+        ],
+        "name": "m1.tiny",
+        "ram": 512,
+        "extra_specs": {"ecus_per_vcpu:": "%(text)s"},
+        "vcpus": 1
+    }
+}

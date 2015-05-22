@@ -1,0 +1,5 @@
+---- instance os Matches (4 in 3 files) ----
+Test_volumes.py (nova\tests\api\openstack\compute\contrib):                    u'Cannot extend volume while instance os is starting.')
+Test_volumes.py (nova\tests\api\openstack\compute\contrib):            self.assertEqual('Cannot attach volume while instance os is '
+Volumes.py (nova\api\openstack\compute\contrib):                    explanation = _("Cannot attach volume while instance os "
+Volumes_plugin.py (nova\api\openstack\compute\contrib):                msg_fmt = _("Cannot attach volume while instance os "

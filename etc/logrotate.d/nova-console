@@ -1,0 +1,35 @@
+/data/log/nova/nova-console.log {
+    daily
+    copytruncate
+    missingok
+    rotate 30
+    compress
+    delaycompress
+}
+
+/data/log/nova/unified-nova-console.log {
+    daily
+    copytruncate
+    missingok
+    rotate 30
+    compress
+    delaycompress
+}
+
+/data/log/nova/nova-consoleauth.log {
+    daily
+    copytruncate
+    missingok
+    rotate 30
+    compress
+    delaycompress
+}
+
+/data/log/nova/unified-nova-consoleauth.log {
+    daily
+    copytruncate
+    missingok
+    rotate 30
+    compress
+    delaycompress
+}

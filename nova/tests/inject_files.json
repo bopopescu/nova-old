@@ -1,0 +1,8 @@
+{
+    "inject_files": [
+        {
+            "path": "test_path",
+            "contents": "test_content"
+        }
+    ]
+}

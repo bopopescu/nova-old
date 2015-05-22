@@ -1,0 +1,4 @@
+## author: Tongkai Yang ##
+
+This inject files decoder tool could decode inject_files.json to source_files and inject_path.conf
+

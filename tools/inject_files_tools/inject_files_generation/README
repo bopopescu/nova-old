@@ -1,0 +1,15 @@
+## author: Tongkai Yang ##
+
+This inject files generation tool is to create inject_files.json to /etc/nova/.
+By using this tool, you should put your files into folder 'source_input_files',
+and the path of VM system which you want to inject into file 'inject_path.conf'.
+'inject_path.conf' is a json style file
+
+
+For example:
+I want to inject a file named 'helloworld.sh' into VM`s path '/etc/init.d/'
+Then I need to put my file path into 'inject_path.conf' with '/etc/init.d/helloworld.sh',
+this tool will read this configuration file and search source_input_files with file
+name 'helloworld.sh'. If there not exist this file, it will not generate this
+inject file.
+

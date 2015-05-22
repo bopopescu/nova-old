@@ -1,0 +1,104 @@
+{
+    "policy":
+    {
+        "key": "vcpu",
+        "private":
+        {
+            "fixed_ip":
+            {
+                "egress": true,
+                "ingress": true
+            },
+            "floating_ip":
+            {
+                "egress": true,
+                "ingress": true
+            }
+        },
+        "public":
+        {
+            "floating_ip":
+            {
+                "egress": true,
+                "ingress": true
+            },
+            "default_snat":
+            {
+                "egress": true,
+                "shared_ingress": true
+            }
+        }
+    },
+    "shaping":
+    {
+        "public":
+        {
+            "1":
+            {
+                "rate": 5,
+                "ceil": 1000,
+                "prio": 4
+            },
+            "default_snat":
+            {
+                "shared_ingress":
+                {
+                    "rate": 5,
+                    "ceil": 1000,
+                    "prio": 5
+                }
+            },
+            "default":
+            {
+                "rate": 5,
+                "ceil": 1000,
+                "prio": 4
+            }
+        },
+        "private":
+        {
+            "1":
+            {
+                "rate": 20,
+                "ceil": 200,
+                "prio": 4
+            },
+            "2":
+            {
+                "rate": 40,
+                "ceil": 200,
+                "prio": 4
+            },
+            "4":
+            {
+                "rate": 80,
+                "ceil": 400,
+                "prio": 4
+            },
+            "8":
+            {
+                "rate": 160,
+                "ceil": 400,
+                "prio": 4
+            },
+            "16":
+            {
+                "rate": 320,
+                "ceil": 1000,
+                "prio": 4
+            },
+            "32":
+            {
+                "rate": 640,
+                "ceil": 1000,
+                "prio": 4
+            },
+            "default":
+            {
+                "rate": 20,
+                "ceil": 200,
+                "prio": 4
+            }
+        }
+    }
+}

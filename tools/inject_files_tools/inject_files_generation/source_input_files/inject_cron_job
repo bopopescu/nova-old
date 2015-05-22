@@ -1,0 +1,21 @@
+##### for HA heartbeat #####
+##### period: 10 secs #####
+
+#
+*/1 * * * * root curl -X PUT -d "state=1" http://169.254.169.254/heartbeat > /dev/null 2>&1
+*/1 * * * * root sleep 10; curl -X PUT -d "state=1" http://169.254.169.254/heartbeat > /dev/null 2>&1
+*/1 * * * * root sleep 20; curl -X PUT -d "state=1" http://169.254.169.254/heartbeat > /dev/null 2>&1
+*/1 * * * * root sleep 30; curl -X PUT -d "state=1" http://169.254.169.254/heartbeat > /dev/null 2>&1
+*/1 * * * * root sleep 40; curl -X PUT -d "state=1" http://169.254.169.254/heartbeat > /dev/null 2>&1
+*/1 * * * * root sleep 50; curl -X PUT -d "state=1" http://169.254.169.254/heartbeat > /dev/null 2>&1
+#
+
+##### for vm monitor #####
+##### period: 1 minute #####
+
+#
+*/1 * * * * root su -c 'python /etc/vm_monitor/send_monitor_data.py' > /dev/null 2>&1
+#
+
+
+
