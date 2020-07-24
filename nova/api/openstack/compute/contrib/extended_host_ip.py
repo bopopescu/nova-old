@@ -32,7 +32,7 @@ class ExtendedHostIpController(wsgi.Controller):
     def show(self, req, resp_obj, id):
         context = req.environ['nova.context']
         if authorize(context):
-            # Attach our slave template to the response object
+            # Attach our subordinate template to the response object
             # resp_obj.attach(xml=ExtendedStatusTemplate())
             server = resp_obj.obj['server']
             db_instance = req.get_db_instance(server['id'])
